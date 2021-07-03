@@ -8,6 +8,21 @@ provider:
   name: aws
   runtime: nodejs14.x
   lambdaHashingVersion: 20201221
+  region: ap-northeast-1
+
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local
+
+package:
+  patterns:
+    - '!node_modules/**'
+    - '!package.json'
+    - '!yarn.lock'
+    - '!.env*'
+    - '!.vscode/**'
+    - '!.prettierrc.json'
+    - '!.dynamodb/**'
 
 functions:
   hello:
