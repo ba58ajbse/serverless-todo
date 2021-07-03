@@ -1,0 +1,14 @@
+{
+  "name": "serverless-todo",
+  "version": "0.1.0",
+  "devDependencies": {
+    "prettier": "^2.3.2",
+    "serverless": "^2.50.0",
+    "serverless-dynamodb-local": "^0.2.40",
+    "serverless-offline": "^7.0.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.939.0",
+    "dotenv": "^10.0.0"
+  }
+}
