@@ -65,6 +65,17 @@ functions:
           path: /todos
           method: post
           cors: true
+  get:
+    handler: functions/get.handler
+    events:
+      - http:
+          path: todos/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true
+          cors: true
 
 resources:
   Resources:
