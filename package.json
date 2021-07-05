@@ -10,5 +10,9 @@
   "dependencies": {
     "aws-sdk": "^2.939.0",
     "dotenv": "^10.0.0"
+  },
+  "scripts": {
+    "start": "npx sls offline start",
+    "start:db": "npx sls dynamodb start"
   }
 }
