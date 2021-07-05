@@ -76,6 +76,17 @@ functions:
               paths:
                 id: true
           cors: true
+  delete:
+    handler: functions/delete.handler
+    events:
+      - http:
+          path: todos/{id}
+          method: delete
+          request:
+            parameters:
+              paths:
+                id: true
+          cors: true
 
 resources:
   Resources:
