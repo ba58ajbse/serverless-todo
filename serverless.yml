@@ -51,8 +51,13 @@ custom:
             sources: [./migrations/todos.json]
 
 functions:
-  hello:
-    handler: handler.hello
+  list:
+    handler: handler.list
+    events:
+      - http:
+          path: /todos
+          method: get
+          cors: true
 
 resources:
   Resources:

@@ -1,18 +1,25 @@
-'use strict';
+const AWS = require('aws-sdk');
+const dynamodb = process.env.IS_OFFLINE
+  ? new AWS.DynamoDB.DocumentClient({ region: 'localhost', endpoint: 'http://localhost:8000' })
+  : new AWS.DynamoDB.DocumentClient();
+const TableName = 'todos';
 
-module.exports.hello = async (event) => {
+module.exports.list = async (event) => {
+  const headers = { 'Content-Type': 'application/json' };
+  let statusCode = 200;
+  let body;
+
+  try {
+    const res = await dynamodb.scan({ TableName }).promise();
+    body = JSON.stringify({ todoList: res['Items'] });
+  } catch (error) {
+    statusCode = error.statusCode;
+    body = JSON.stringify({ statusCode, error: error.message });
+  }
+
   return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless v1.0! Your function executed successfully!',
-        input: event,
-      },
-      null,
-      2
-    ),
+    statusCode,
+    body,
+    headers,
   };
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };
