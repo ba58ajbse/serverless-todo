@@ -1,0 +1,23 @@
+[
+  {
+    "id": "qwer1234",
+    "todo": "React",
+    "completed": false,
+    "createdAt": "20210601 10:00:00",
+    "updatedAt": "20210601 10:00:00"
+  },
+  {
+    "id": "asdf1234",
+    "todo": "JavaScript",
+    "completed": false,
+    "createdAt": "20210602 10:00:00",
+    "updatedAt": "20210602 10:00:00"
+  },
+  {
+    "id": "zxcv1234",
+    "todo": "PHP",
+    "completed": false,
+    "createdAt": "20210603 10:00:00",
+    "updatedAt": "20210603 10:00:00"
+  }
+]

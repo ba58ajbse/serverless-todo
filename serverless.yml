@@ -9,6 +9,17 @@ provider:
   runtime: nodejs14.x
   lambdaHashingVersion: 20201221
   region: ap-northeast-1
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/todos'
 
 plugins:
   - serverless-offline
@@ -24,6 +35,42 @@ package:
     - '!.prettierrc.json'
     - '!.dynamodb/**'
 
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+    seed:
+      development:
+        sources:
+          - table: todos
+            sources: [./migrations/todos.json]
+
 functions:
-  hello:
-    handler: handler.hello
+  list:
+    handler: handler.list
+    events:
+      - http:
+          path: /todos
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: todos
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
