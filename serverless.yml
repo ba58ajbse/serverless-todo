@@ -52,14 +52,14 @@ custom:
 
 functions:
   list:
-    handler: handler.list
+    handler: functions/list.handler
     events:
       - http:
           path: /todos
           method: get
           cors: true
   put:
-    handler: handler.put
+    handler: functions/put.handler
     events:
       - http:
           path: /todos

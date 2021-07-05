@@ -10,27 +10,7 @@ const getDateTime = () => {
   return dateTime;
 };
 
-module.exports.list = async (event) => {
-  const headers = { 'Content-Type': 'application/json' };
-  let statusCode = 200;
-  let body;
-
-  try {
-    const res = await dynamodb.scan({ TableName }).promise();
-    body = JSON.stringify({ todoList: res['Items'] });
-  } catch (error) {
-    statusCode = error.statusCode;
-    body = JSON.stringify({ statusCode, error: error.message });
-  }
-
-  return {
-    statusCode,
-    body,
-    headers,
-  };
-};
-
-module.exports.put = async (event) => {
+module.exports.handler = async (event) => {
   const headers = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': 'POST',
