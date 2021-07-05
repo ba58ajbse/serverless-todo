@@ -58,6 +58,13 @@ functions:
           path: /todos
           method: get
           cors: true
+  put:
+    handler: handler.put
+    events:
+      - http:
+          path: /todos
+          method: post
+          cors: true
 
 resources:
   Resources:
