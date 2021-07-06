@@ -8,9 +8,9 @@ const getDateTime = () => {
   const date = new Date();
   const dateTime = date
     .toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
-    .split(/\/| |:/g)
-    .map((str) => str.length === 1 ? str.padStart(2, 0) : str)
-    .join('')
+    .split(/\/|-| |:/g)
+    .map((str) => (str.length === 1 ? str.padStart(2, 0) : str))
+    .join('');
   return dateTime;
 };
 
